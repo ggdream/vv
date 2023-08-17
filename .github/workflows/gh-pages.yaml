@@ -17,7 +17,7 @@ jobs:
       - run: flutter pub get
       - run: flutter build web --base-href "/vv/" --web-renderer html -v
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: build/web
