@@ -1,0 +1,23 @@
+name: build and deploy web
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - run: sudo apt-get update && sudo apt-get install -y rsync
+      - run: flutter pub get
+      - run: flutter build web --base-href "/vv/" --web-renderer html -v
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: build/web
